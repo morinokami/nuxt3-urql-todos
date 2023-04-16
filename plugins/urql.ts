@@ -1,6 +1,14 @@
-import { cacheExchange, Client, fetchExchange, ssrExchange } from '@urql/vue';
+import {
+	cacheExchange,
+	Client,
+	fetchExchange,
+	SSRData,
+	ssrExchange,
+} from '@urql/vue';
 
+// https://nuxt.com/docs/api/composables/use-nuxt-app#payload
 const ssrKey = '__URQL_DATA__';
+const useUrqlData = () => useState<SSRData | null>(ssrKey, () => null);
 
 export default defineNuxtPlugin((nuxtApp) => {
 	const { vueApp } = nuxtApp;
@@ -12,12 +20,16 @@ export default defineNuxtPlugin((nuxtApp) => {
 	nuxtApp.hook('app:created', () => {
 		// Called when initial vueApp instance is created.
 		if (process.client) {
-			ssr.restoreData(nuxtApp.payload[ssrKey]);
+			const urqlData = useUrqlData();
+			if (urqlData.value) {
+				ssr.restoreData(urqlData.value);
+			}
 		}
 	});
 	nuxtApp.hook('app:rendered', () => {
 		// Called when SSR rendering is done.
-		nuxtApp.payload[ssrKey] = ssr.extractData();
+		const urqlData = useUrqlData();
+		urqlData.value = ssr.extractData();
 	});
 
 	const client = new Client({
