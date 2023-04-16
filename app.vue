@@ -1,4 +1,8 @@
 <script setup lang="ts">
+useHead({
+	title: 'Nuxt 3 + urql',
+});
+
 const isAuthenticated = useState('isAuthenticated', () => !!getToken());
 function setIsAuthenticated(value: boolean) {
 	isAuthenticated.value = value;
