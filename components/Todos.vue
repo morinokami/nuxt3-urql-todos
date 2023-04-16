@@ -11,7 +11,7 @@ const TodosQuery = gql`
 	}
 `;
 
-const { data, fetching, error } = useQuery({ query: TodosQuery });
+const { data, fetching, error } = await useQuery({ query: TodosQuery });
 </script>
 
 <template>
