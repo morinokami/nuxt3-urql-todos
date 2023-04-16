@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { gql, useMutation } from '@urql/vue';
+import { useMutation } from '@urql/vue';
+import { graphql } from '~/gql';
 
 defineProps<{
 	id: string;
@@ -8,13 +9,13 @@ defineProps<{
 	disabled: boolean;
 }>();
 
-const ToggleTodoMutation = gql`
-	mutation ($id: ID!) {
+const ToggleTodoMutation = graphql(`
+	mutation ToggleTodo($id: ID!) {
 		toggleTodo(id: $id) {
 			id
 		}
 	}
-`;
+`);
 
 const {
 	executeMutation: toggleTodo,

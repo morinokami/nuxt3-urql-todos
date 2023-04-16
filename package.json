@@ -1,20 +1,25 @@
 {
-  "name": "nuxt-app",
-  "private": true,
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "devDependencies": {
-    "@types/node": "^18.15.11",
-    "nuxt": "^3.4.1",
-    "prettier": "^2.8.7"
-  },
-  "dependencies": {
-    "@urql/vue": "^1.1.0",
-    "graphql": "^16.6.0"
-  }
+	"name": "nuxt-app",
+	"private": true,
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "concurrently \"nuxt dev\" \"pnpm run codegen --watch\"",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare",
+		"codegen": "graphql-codegen --config codegen.ts"
+	},
+	"devDependencies": {
+		"@graphql-codegen/cli": "^3.3.0",
+		"@graphql-codegen/client-preset": "^3.0.0",
+		"@types/node": "^18.15.11",
+		"concurrently": "^8.0.1",
+		"nuxt": "^3.4.1",
+		"prettier": "^2.8.7",
+		"typescript": "^5.0.4"
+	},
+	"dependencies": {
+		"@urql/vue": "^1.1.0",
+		"graphql": "^16.6.0"
+	}
 }

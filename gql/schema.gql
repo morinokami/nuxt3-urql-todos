@@ -1,0 +1,31 @@
+"""Exposes a URL that specifies the behavior of this scalar."""
+directive @specifiedBy(
+  """The URL that specifies the behavior of this scalar."""
+  url: String!
+) on SCALAR
+
+type Message {
+  id: ID
+  from: String
+  message: String
+}
+
+type Mutation {
+  toggleTodo(id: ID!): Todo
+}
+
+type Query {
+  todos: [Todo]
+  messages: [Message]
+}
+
+type Subscription {
+  newMessages: Message
+}
+
+type Todo {
+  id: ID
+  text: String
+  complete: Boolean
+}
+
