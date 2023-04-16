@@ -33,8 +33,12 @@ export default defineNuxtPlugin((nuxtApp) => {
 	});
 
 	const client = new Client({
-		url: 'https://0ufyz.sse.codesandbox.io',
+		url: 'https://k1ths.sse.codesandbox.io/',
 		exchanges: [cacheExchange, ssr, fetchExchange],
+		fetchOptions: () => {
+			const token = getToken();
+			return token ? { headers: { Authorization: `Bearer ${token}` } } : {};
+		},
 	});
 
 	vueApp.provide('$urql', ref(client));

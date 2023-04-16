@@ -13,6 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
+    "\n\tmutation Login($name: String!) {\n\t\tlogin(name: $name)\n\t}\n": types.LoginDocument,
     "\n\tmutation ToggleTodo($id: ID!) {\n\t\ttoggleTodo(id: $id) {\n\t\t\tid\n\t\t}\n\t}\n": types.ToggleTodoDocument,
     "\n\tquery Todos {\n\t\ttodos {\n\t\t\tid\n\t\t\ttext\n\t\t\tcomplete\n\t\t}\n\t}\n": types.TodosDocument,
 };
@@ -31,6 +32,10 @@ const documents = {
  */
 export function graphql(source: string): unknown;
 
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "\n\tmutation Login($name: String!) {\n\t\tlogin(name: $name)\n\t}\n"): (typeof documents)["\n\tmutation Login($name: String!) {\n\t\tlogin(name: $name)\n\t}\n"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

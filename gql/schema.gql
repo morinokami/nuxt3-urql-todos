@@ -1,31 +1,30 @@
-"""Exposes a URL that specifies the behavior of this scalar."""
-directive @specifiedBy(
-  """The URL that specifies the behavior of this scalar."""
-  url: String!
-) on SCALAR
+directive @cacheControl(maxAge: Int, scope: CacheControlScope) on FIELD_DEFINITION | OBJECT | INTERFACE
 
-type Message {
-  id: ID
-  from: String
-  message: String
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
 }
 
 type Mutation {
   toggleTodo(id: ID!): Todo
+  login(name: String!): String
 }
 
 type Query {
   todos: [Todo]
-  messages: [Message]
 }
 
 type Subscription {
-  newMessages: Message
+  updateTodo: Todo
 }
 
 type Todo {
   id: ID
   text: String
   complete: Boolean
+  updatedBy: String
 }
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
 
